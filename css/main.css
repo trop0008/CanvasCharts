@@ -1,0 +1,19 @@
+canvas {
+    
+    border: 3px solid #ddd;
+    border-radius: 20px;
+    display: none;
+
+    
+}
+
+.content {
+    display: block;
+    clear: both;
+    margin: 2vh auto;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+   
+}
+
