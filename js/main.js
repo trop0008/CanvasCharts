@@ -254,6 +254,7 @@ function drawArcs() {
 }
 /***************** button functions *************/
 function showArcs(ev) {
+    ev.preventDefault();
     document.getElementById("btnPie").className = "tab-item";
     document.getElementById("btnArc").className = "tab-item active";
     document.getElementById("pieCanvas").style.display = "none";
@@ -261,6 +262,7 @@ function showArcs(ev) {
 }
 
 function showPie(ev) {
+    ev.preventDefault();
     document.getElementById("btnArc").className = "tab-item";
     document.getElementById("btnPie").className = "tab-item active";
     document.getElementById("pieCanvas").style.display = "inline-flex";
