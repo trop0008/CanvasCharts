@@ -18,7 +18,7 @@ Updated: March 16, 2017
 *****************************************************************/
 //Declarations
 "use strict";
-let url = "../json/browsers.json";
+let url = "http://trop0008.edumedia.ca/mad9022/canvas/json/browsers.json";
 let sortable;
 let values = [];
 let labels = [];
