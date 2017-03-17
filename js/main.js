@@ -19,13 +19,11 @@ Updated: March 16, 2017
 //Declarations
 "use strict";
 let url = "http://trop0008.edumedia.ca/mad9022/canvas/json/browsers.json";
-let sortable;
 let values = [];
-let labels = [];
 let total = 0;
 let smallest = 0;
 let largest = 0;
-//var canvas, context;
+
 /******************* fetching json file  **************************************/
 let serverData = {
     httpRequest: "GET"
@@ -46,9 +44,6 @@ let serverData = {
         fetch(request).then(function (response) {
             return response.json();
         }).then(function (jsonData) {
-            /* without the http: is front of the image url it would randomly not show images so http: was added to the url string to solve the bug*/
-            //console.log(jsonData);
-            //console.log(jsonData.label);
             document.getElementById("chartTitle").innerHTML = jsonData.label;
             calculateTotal(jsonData.segments);
             drawPie();
@@ -66,7 +61,7 @@ let serverData = {
             }
 
             function reqError(err) {
-                document.getElementById('myCard').innerHTML = 'Fetch Error :-S', err;
+                document.getElementById('contentDiv').innerHTML = 'Fetch Error :-S', err;
             }
             var oReq = new XMLHttpRequest();
             oReq.onload = reqListener;
@@ -87,7 +82,7 @@ function jsonError() {
     }
 
     function reqError(err) {
-        document.getElementById('myCard').innerHTML = 'Fetch Error :-S', err;
+        document.getElementById('contentDiv').innerHTML = 'Fetch Error :-S', err;
     }
     var oReq = new XMLHttpRequest();
     oReq.onload = reqListener;
@@ -107,7 +102,7 @@ function getData() {
 /********************** setting values **********************/
 function calculateTotal(segmentdata) {
     /*
-        using the json data we calculate the smallest larges and total and create a sortable array from the object
+        using the json data we calculate the smallest, the largest, the total and create a sortable array from the object
     */
     smallest = segmentdata[0].value;
     largest = segmentdata[0].value;
@@ -121,7 +116,6 @@ function calculateTotal(segmentdata) {
             }
             values.push([item.color, item.label, item.value]);
             total += item.value;
-            
         });
     }
 }
@@ -218,7 +212,6 @@ function drawArcs() {
     values_copy.sort(function (a, b) {
         return a[2] - b[2]
     });
-    
     //clear the canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
     let cx = canvas.width / 2;
