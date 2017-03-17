@@ -23,6 +23,7 @@ let values = [];
 let total = 0;
 let smallest = 0;
 let largest = 0;
+let CanvasTitle = "";
 
 /******************* fetching json file  **************************************/
 let serverData = {
@@ -44,7 +45,8 @@ let serverData = {
         fetch(request).then(function (response) {
             return response.json();
         }).then(function (jsonData) {
-            document.getElementById("chartTitle").innerHTML = jsonData.label;
+          // document.getElementById("chartTitle").innerHTML = jsonData.label;
+            CanvasTitle  = jsonData.label;
             calculateTotal(jsonData.segments);
             drawPie();
             drawArcs();
@@ -54,7 +56,8 @@ let serverData = {
             function reqListener() {
                 console.log(err)
                 var jsonData = JSON.parse(this.responseText);
-                document.getElementById("chartTitle").innerHTML = jsonData.label;
+              // document.getElementById("chartTitle").innerHTML = jsonData.label;
+                 CanvasTitle  = jsonData.label;
                 calculateTotal(jsonData.segments);
                 drawPie();
                 drawArcs();
@@ -75,7 +78,8 @@ let serverData = {
 function jsonError() {
     function reqListener() {
         var jsonData = JSON.parse(this.responseText);
-        document.getElementById("chartTitle").innerHTML = jsonData.label;
+      // document.getElementById("chartTitle").innerHTML = jsonData.label;
+         CanvasTitle  = jsonData.label;
         calculateTotal(jsonData.segments);
         drawPie();
         drawArcs();
@@ -182,7 +186,7 @@ function drawPie() {
         dy = Math.sin(midAngle) * (radius + 30);
         context.lineTo(dx, dy);
         context.stroke();
-        context.font = '16px Helvetica, Calibri';
+        context.font = '14px Helvetica, Calibri';
         context.fillStyle = colour;
         if (dx > 0) {
             context.textAlign = 'left';
@@ -201,7 +205,14 @@ function drawPie() {
         context.restore();
         //update the currentAngle
         currentAngle = endAngle;
+        
     }
+     context.font = '20px Helvetica, Calibri';
+        context.textAlign = 'center';
+        context.fillStyle = "white";
+        
+        context.fillText(CanvasTitle, cx , canvas.height-10);
+        context.restore();
 }
 /************************* Arc ****************************/
 function drawArcs() {
@@ -235,7 +246,7 @@ function drawArcs() {
         context.closePath();
         // rotating context to create vertical text
         context.rotate(+Math.PI / 2);
-        context.font = '16px Helvetica, Calibri';
+        context.font = '14px Helvetica, Calibri';
         context.textAlign = 'right';
         context.fillStyle = colour;
         context.fillText(values[i][1], cx - 2, -cy - radius + 5);
@@ -244,6 +255,13 @@ function drawArcs() {
         radius += 20;
         context.restore();
     }
+    
+    context.font = '20px Helvetica, Calibri';
+        context.textAlign = 'center';
+        context.fillStyle = "white";
+        
+        context.fillText(CanvasTitle, cx , 30);
+        context.restore();
 }
 /***************** button functions *************/
 function showArcs(ev) {
