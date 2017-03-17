@@ -3,6 +3,7 @@ canvas {
     border: 3px solid #ddd;
     border-radius: 20px;
     display: none;
+    background: black;
 
     
 }
